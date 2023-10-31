@@ -1,0 +1,7 @@
+{
+  "name": "gcappsite",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
