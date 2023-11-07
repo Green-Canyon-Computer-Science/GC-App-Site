@@ -9,6 +9,12 @@
                         <ion-input placeholder="Poll Description" label="" id="desc"></ion-input>
                         <br>
                         <ion-input placeholder="Button Text" label="" id="button"></ion-input>
+                        <br>
+                        <h1>Send with notification</h1>
+                        <ion-checkbox label-placement="fixed" class="check" id="allnotif">All</ion-checkbox>
+                        <ion-checkbox label-placement="fixed" class="check" id="eventsnotif">Events</ion-checkbox>
+                        <ion-checkbox label-placement="fixed" class="check" id="gamesnotif">Games</ion-checkbox>
+                        <ion-checkbox label-placement="fixed" class="check" id="schedulenotif">Schedule</ion-checkbox>
                     </ion-card-content>
                 </ion-card>
                 
@@ -109,17 +115,21 @@
     }
 
     function createSendPoll() {
+
+
         // const pollContainer = this.$refs.poll;
         const title = document.querySelectorAll("#title")[0].value
         const desc = document.querySelectorAll("#desc")[0].value
-        const button = document.querySelectorAll(".button")[0].value
-
+        const button = document.querySelectorAll("#button")[0].value
+        if (!confirm('Are you sure you want to create poll ' + title  + '?')) {
+            return;
+        }
         const questions = document.querySelectorAll(".question");
         const poll = [];
         questions.forEach((el) => {
             const question = el.querySelectorAll("ion-input")[0].value;
             const type = el.querySelectorAll("ion-radio-group")[0].value;
-            const required = el.querySelectorAll("#required")[0].value
+            const required = el.querySelectorAll(".required")[0].checked;
             
             const options = [].slice.call((el.querySelectorAll("ion-input"))).splice(1);
             const optionsArray = [];
@@ -153,9 +163,41 @@
         }),     headers: {
             'Content-Type': 'application/json'
         },}).then(() => {
-            location.reload();
+            // location.reload();
             alert("Poll created!");
         });
+
+
+        // If notification!
+        const allnotif = document.querySelectorAll("#allnotif")[0].checked;
+        const gamesnotif = document.querySelectorAll("#gamesnotif")[0].checked;
+        const eventsnotif = document.querySelectorAll("#eventsnotif")[0].checked;
+        const schedulenotif = document.querySelectorAll("#schedulenotif")[0].checked;
+
+        if (allnotif || gamesnotif || eventsnotif || schedulenotif) {
+            let recipient = "";
+            if (allnotif) recipient = "all";
+            if (gamesnotif) recipient = "game";
+            if (eventsnotif) recipient = "event";
+            if (schedulenotif) recipient = "schedule";
+
+            console.log("Sending notification to " + recipient);
+
+            fetch("http://ec2-18-144-101-122.us-west-1.compute.amazonaws.com/notification", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "topic" : recipient,
+                    "title" : "New poll!",
+                    "body" : "New poll '" + title + "'",
+                    "key": "w0lfpAck!@#"
+                })
+                
+            })
+
+        }
     }
 
     function moveElement(arr, index, direction) {
@@ -206,6 +248,8 @@
     }
     ion-card {
         width: 80%;
+        padding: 1px;
+        margin: 5px;
     }
     #id {
         overflow: scroll;
@@ -216,4 +260,5 @@
     ion-item {
         width: 400px;
     }
+    .check {}
 </style>
