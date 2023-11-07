@@ -4,11 +4,19 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    redirect: '/Inbox'
+    redirect: '/Announcement%20Manager'
   },
   {
-    path: '/:id',
-    component: () => import ('../views/FolderPage.vue')
+    path: '/Poll%20Manager',
+    component: () => import ('../views/PollManager.vue')
+  },
+  {
+    path: '/Notification%20Manager',
+    component: () => import ('../views/NotificationManager.vue')
+  },
+  {
+    path: '/Announcment%20Manager',
+    component: () => import ('../views/AnnouncementManager.vue')
   }
 ]
 

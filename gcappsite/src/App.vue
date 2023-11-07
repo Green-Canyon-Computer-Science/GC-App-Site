@@ -82,12 +82,6 @@ const appPages = [
     mdIcon: cloudDownloadSharp,
   }
 ];
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-
-const path = window.location.pathname.split('folder/')[1];
-if (path !== undefined) {
-  selectedIndex.value = appPages.findIndex((page) => page.title.toLowerCase() === path.toLowerCase());
-}
 </script>
 
 <style scoped>
@@ -108,6 +102,10 @@ ion-menu.md ion-list {
 
 ion-menu.md ion-note {
   margin-bottom: 30px;
+}
+
+ion-router-outlet {
+  overflow-y: scroll;
 }
 
 ion-menu.md ion-list-header,
