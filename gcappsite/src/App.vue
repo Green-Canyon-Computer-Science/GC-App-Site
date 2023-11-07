@@ -65,19 +65,19 @@ const selectedIndex = ref(0);
 const appPages = [
   {
     title: 'Announcment Manager',
-    url: '/Announcment Manager',
+    url: '/announcement',
     iosIcon: megaphoneOutline,
     mdIcon: megaphoneSharp,
   },
   {
     title: 'Poll Manager',
-    url: '/Poll Manager',
+    url: '/poll',
     iosIcon: checkboxOutline,
     mdIcon: checkboxSharp,
   },
   {
     title: 'Notification Manager',
-    url: '/Notification Manager',
+    url: '/notification',
     iosIcon: cloudDownloadOutline,
     mdIcon: cloudDownloadSharp,
   }

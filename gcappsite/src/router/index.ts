@@ -4,20 +4,21 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    redirect: '/Announcement%20Manager'
+    redirect: '/announcement'
   },
   {
-    path: '/Poll%20Manager',
+    path: '/poll',
     component: () => import ('../views/PollManager.vue')
   },
   {
-    path: '/Notification%20Manager',
+    path: '/notification',
     component: () => import ('../views/NotificationManager.vue')
   },
   {
-    path: '/Announcment%20Manager',
+    path: '/announcement',
     component: () => import ('../views/AnnouncementManager.vue')
   }
+  
 ]
 
 const router = createRouter({
