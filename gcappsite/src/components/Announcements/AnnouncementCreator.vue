@@ -15,6 +15,9 @@
         <div id="markdowneditor">
             <v-md-editor v-model="text" height="400px" ></v-md-editor>
         </div>
+        <button style="width: 50%; font-size: 30px;" @click="createSendAnnouncement">
+            Create Announcement
+        </button>
     </div>
 </template>
 
@@ -25,17 +28,6 @@
 </script>
 
 <style>
-    .division {
-        position: relative;
-        width: 80%;
-        height: 3px;
-        background-color: white;
-        left: 50%;
-        transform: translate(-50%);        
-    }
-    h1, h2 {
-        text-align: center;
-    }
     textarea {
         background-color: white !important;
     }

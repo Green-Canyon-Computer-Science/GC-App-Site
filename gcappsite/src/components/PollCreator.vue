@@ -163,7 +163,7 @@
         }),     headers: {
             'Content-Type': 'application/json'
         },}).then(() => {
-            // location.reload();
+            location.reload();
             alert("Poll created!");
         });
 

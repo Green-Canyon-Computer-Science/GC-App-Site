@@ -17,12 +17,13 @@
             <div class="division"></div>
 
             <ion-segment v-model="selectedTab" value="tab2">
-                <ion-segment-button value="tab1">
-                    Create Announcement
-                </ion-segment-button>
                 <ion-segment-button value="tab2">
                     View Announcements
                 </ion-segment-button>
+                <ion-segment-button value="tab1">
+                    Create Announcement
+                </ion-segment-button>
+
             </ion-segment>
 
             <!-- Render content based on the selected tab -->
