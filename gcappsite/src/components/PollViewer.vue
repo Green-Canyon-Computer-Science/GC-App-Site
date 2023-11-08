@@ -9,9 +9,6 @@
         <div style="width: 100%;" v-if="pollid != -1">
             <ion-list lines="none" class="left centercontent">
                 <ResponseView :pollid="pollid"/>
-                <ion-item class="centercontent" >
-                    <ion-button  :href="'http://ec2-18-144-101-122.us-west-1.compute.amazonaws.com/pollsresponsescsv?pollid=' + pollid" :download="'poll_' + pollid + '.csv'" >Download CSV</ion-button>
-                </ion-item>
             </ion-list>
         </div>        
     </div>

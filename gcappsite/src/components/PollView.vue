@@ -24,6 +24,7 @@
 
 <script setup>
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonButton, IonCardContent, IonCardSubtitle, IonInfiniteScrollContent, IonInfiniteScroll} from '@ionic/vue';
+import { IonItem } from '@ionic/vue';
 const props = defineProps(['poll'])
 const emit = defineEmits(['responses']);
 

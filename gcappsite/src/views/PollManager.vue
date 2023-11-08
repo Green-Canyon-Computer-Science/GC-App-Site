@@ -40,7 +40,7 @@
     import PollCreator from "@/components/PollCreator.vue";
     import PollViewer from "@/components/PollViewer.vue";
     import { IonSegment, IonSegmentButton } from "@ionic/vue";
-    import { IonPage, IonContent, IonHeader } from "@ionic/vue";
+    import { IonPage, IonContent, IonHeader, IonMenuButton, IonToolbar, IonTitle, IonButtons } from "@ionic/vue";
     import { ref } from 'vue';
 
     const selectedTab = ref('tab2'); // Set the default selected tab
