@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.17",
     "vue-simplemde": "^2.1.1"
   }
 }

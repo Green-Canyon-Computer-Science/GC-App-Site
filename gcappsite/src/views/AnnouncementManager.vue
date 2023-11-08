@@ -5,21 +5,57 @@
             <ion-buttons slot="start">
                 <ion-menu-button color="primary"></ion-menu-button>
             </ion-buttons>
-            <ion-title>Announcment</ion-title>
+            <ion-title>Announcement Manager</ion-title>
             </ion-toolbar>
         </ion-header>
 
         <ion-content>
-            <h1>Announcment Manager</h1>
+                        
+            <div>
+                <h1>Announcement Manager</h1>
+            </div>
+            <div class="division"></div>
+
+            <ion-segment v-model="selectedTab" value="tab2">
+                <ion-segment-button value="tab1">
+                    Create Announcement
+                </ion-segment-button>
+                <ion-segment-button value="tab2">
+                    View Announcements
+                </ion-segment-button>
+            </ion-segment>
+
+            <!-- Render content based on the selected tab -->
+            <div v-if="selectedTab === 'tab1'">
+                <AnnouncementCreator />
+            </div>
+            <div v-if="selectedTab === 'tab2'">
+                <AnnouncementViewer />    
+            </div>
         </ion-content>
     </ion-page>
 </template>
 
 <script setup>
-    import { IonPage, IonContent, IonHeader } from "@ionic/vue";
+    import AnnouncementCreator from "@/components/Announcements/AnnouncementCreator.vue";
+    import AnnouncementViewer from "@/components/Announcements/AnnouncementViewer.vue";
+    import { IonSegment, IonSegmentButton } from "@ionic/vue";
+    import { IonPage, IonContent, IonHeader, IonMenuButton, IonToolbar, IonTitle, IonButtons } from "@ionic/vue";
+    import { ref } from 'vue';
 
+    const selectedTab = ref('tab2'); // Set the default selected tab
 </script>
 
 <style scoped>
-
+    .division {
+        position: relative;
+        width: 80%;
+        height: 3px;
+        background-color: white;
+        left: 50%;
+        transform: translate(-50%);        
+    }
+    h1, h2 {
+        text-align: center;
+    }
 </style>
