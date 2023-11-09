@@ -4,6 +4,8 @@
             <ion-card-content>
                 <ion-input placeholder="Announcement Title" label="" id="title"></ion-input>
                 <ion-input placeholder="Announcement Description" label="" id="desc"></ion-input>
+                <ion-input placeholder="Image Link" label="" id="imglink" v-model="imageLink"></ion-input>
+                <img :src="imageLink" alt="" style="border: 1px solid white; max-height: 165px;">
                 <br>
                 <h1>Send with notification</h1>
                 <ion-checkbox label-placement="fixed" class="check" id="allnotif">All</ion-checkbox>
@@ -15,7 +17,7 @@
         <div id="markdowneditor">
             <v-md-editor v-model="text" height="400px" ></v-md-editor>
         </div>
-        <button style="width: 50%; font-size: 30px;" @click="createSendAnnouncement">
+        <button style="width: 50%; font-size: 30px;  margin-bottom: 15px;" @click="createSendAnnouncement">
             Create Announcement
         </button>
     </div>
@@ -23,8 +25,66 @@
 
 <script setup>
     import { ref } from 'vue';
+    import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem } from '@ionic/vue';
 
     const text = ref('');
+    const imageLink = ref('');
+
+    function createSendAnnouncement() {
+        // const pollContainer = this.$refs.poll;
+        const title = document.querySelectorAll("#title")[0].value;
+        const desc = document.querySelectorAll("#desc")[0].value;
+        const imglink = document.querySelectorAll("#imglink")[0].value;
+
+        console.log("Creating " + title + " with description " + desc);
+
+        const endpoint = "http://ec2-18-144-101-122.us-west-1.compute.amazonaws.com/announcements";
+        fetch(endpoint, { method: "POST", body: JSON.stringify({
+            "timestamp": (new Date().getTime()/1000),
+            "title": title,
+            "descr": desc,
+            "imglink": imglink,
+            "article": text.value,
+            "key": "w0lfpAck!@#"
+        }),     headers: {
+            'Content-Type': 'application/json'
+        },}).then(() => {
+            location.reload();
+            alert("Announcement created!");
+        });
+
+
+        // If notification!
+        const allnotif = document.querySelectorAll("#allnotif")[0].checked;
+        const gamesnotif = document.querySelectorAll("#gamesnotif")[0].checked;
+        const eventsnotif = document.querySelectorAll("#eventsnotif")[0].checked;
+        const schedulenotif = document.querySelectorAll("#schedulenotif")[0].checked;
+
+        if (allnotif || gamesnotif || eventsnotif || schedulenotif) {
+            let recipient = "";
+            if (allnotif) recipient = "all";
+            if (gamesnotif) recipient = "game";
+            if (eventsnotif) recipient = "event";
+            if (schedulenotif) recipient = "schedule";
+
+            console.log("Sending notification to " + recipient);
+
+            fetch("http://ec2-18-144-101-122.us-west-1.compute.amazonaws.com/notification", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "topic" : recipient,
+                    "title" : "New announcement!",
+                    "body" : title,
+                    "key": "w0lfpAck!@#"
+                })
+                
+            })
+
+        }
+    }
 </script>
 
 <style>

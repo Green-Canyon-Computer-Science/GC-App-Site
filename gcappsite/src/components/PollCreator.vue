@@ -76,7 +76,7 @@
                 +
             </button>
             <br><br><br><br>
-            <button style="width: 20%; font-size: 30px;" @click="createSendPoll">
+            <button style="width: 20%; font-size: 30px; margin-bottom: 15px;" @click="createSendPoll">
                 Create Poll
             </button>
         </div>        
