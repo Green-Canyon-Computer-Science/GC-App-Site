@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.17",
+    "inherits": "^2.0.4",
     "vue-simplemde": "^2.1.1"
   }
 }
