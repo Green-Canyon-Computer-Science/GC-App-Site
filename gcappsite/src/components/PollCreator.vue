@@ -7,6 +7,8 @@
                     <ion-card-content>
                         <ion-input placeholder="Poll Title" label="" id="title"></ion-input>
                         <ion-input placeholder="Poll Description" label="" id="desc"></ion-input>
+                        <ion-input placeholder="Image Link" label="" id="imglink" v-model="imageLink"></ion-input>
+                        <img :src="imageLink" alt="" style="border: 1px solid white; max-height: 165px;">
                         <br>
                         <ion-input placeholder="Button Text" label="" id="button"></ion-input>
                         <br>
@@ -88,6 +90,7 @@
 <script setup>
     import { ref } from "vue";
     import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem } from '@ionic/vue';
+    const imageLink = ref('');
 
     const pollData = ref([]);
 
@@ -158,7 +161,7 @@
             "button": button,
             "disabled": false,
             "polldata": JSON.stringify({poll: poll}),
-            "image": "",
+            "image": imageLink.value,
             "key": "w0lfpAck!@#"
         }),     headers: {
             'Content-Type': 'application/json'

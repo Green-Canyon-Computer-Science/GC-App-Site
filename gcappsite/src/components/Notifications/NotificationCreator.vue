@@ -13,7 +13,7 @@
                 <ion-checkbox label-placement="fixed" class="check" id="schedulenotif">Schedule</ion-checkbox>
                 
                 <br>
-                <ion-button>
+                <ion-button @click="sendNotification">
                     Send
                 </ion-button>
             </ion-card-content>
@@ -24,6 +24,42 @@
 
 <script setup>
 
+    function sendNotification() {
+        const title = document.querySelectorAll("#title")[0].value;
+        const body = document.querySelectorAll("#desc")[0].value;
+
+        // If notification!
+        const allnotif = document.querySelectorAll("#allnotif")[0].checked;
+        const gamesnotif = document.querySelectorAll("#gamesnotif")[0].checked;
+        const eventsnotif = document.querySelectorAll("#eventsnotif")[0].checked;
+        const schedulenotif = document.querySelectorAll("#schedulenotif")[0].checked;
+
+        if (allnotif || gamesnotif || eventsnotif || schedulenotif) {
+            let recipient = "";
+            if (allnotif) recipient = "all";
+            if (gamesnotif) recipient = "game";
+            if (eventsnotif) recipient = "event";
+            if (schedulenotif) recipient = "schedule";
+
+            console.log("Sending notification to " + recipient);
+
+            fetch("http://ec2-18-144-101-122.us-west-1.compute.amazonaws.com/notification", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "topic" : recipient,
+                    "title" : title,
+                    "body" : body,
+                    "key": "w0lfpAck!@#"
+                })
+                
+            });
+            location.reload();
+
+        }
+    }
 </script>
 
 <style scoped>
