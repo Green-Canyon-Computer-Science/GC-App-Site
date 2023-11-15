@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+    import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem, IonCheckbox } from '@ionic/vue';
 
     function sendNotification() {
         const title = document.querySelectorAll("#title")[0].value;
@@ -55,8 +56,10 @@
                     "key": "w0lfpAck!@#"
                 })
                 
+            }).then(() => {
+                location.reload();
+                    
             });
-            location.reload();
 
         }
     }

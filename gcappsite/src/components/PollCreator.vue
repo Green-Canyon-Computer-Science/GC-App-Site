@@ -89,7 +89,7 @@
 
 <script setup>
     import { ref } from "vue";
-    import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem } from '@ionic/vue';
+    import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem, IonCheckbox } from '@ionic/vue';
     const imageLink = ref('');
 
     const pollData = ref([]);
