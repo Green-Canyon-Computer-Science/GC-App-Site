@@ -17,7 +17,7 @@ const announcements = ref([]);
 const announcementid = ref(-1);
 
 const getannouncements = async () => {
-  const endpoint = "http://ec2-18-144-101-122.us-west-1.compute.amazonaws.com/announcements?max=100&offset=0&sortbytime=1";
+  const endpoint = "http://ec2-18-144-101-122.us-west-1.compute.amazonaws.com/api/announcements?max=100&offset=0&sortbytime=1";
   try {
     const result = (await (await fetch(endpoint, { method: "GET" })).json()).data;
     console.log(result);
