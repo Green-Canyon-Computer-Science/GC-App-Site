@@ -25,10 +25,10 @@
                         <ProgressBar :value="Math.round((data.totalmem-data.freemem) / data.totalmem * 100)"></ProgressBar>
                         <h6>{{ Math.round((data.totalmem-data.freemem)/1048576) }}mb/{{ Math.round(data.totalmem/1048576) }}mb</h6>
                         <br><br>
-                        <h2>Usage Over Time</h2>
+                        <!-- <h2>Usage Over Time</h2>
                         <div class="bg">
                             <Chart type="line" :data="chartData" :options="chartOptions" class="h-30rem" />
-                        </div>
+                        </div> -->
                     </div>
                     <div v-if="data == {}">
                         <h2>Loading ...</h2>
