@@ -34,7 +34,7 @@ function conf(title, id) {
 }
 
 function deleteannouncement(id) {
-    const endpoint = "http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/announcements";
+    const endpoint = "http://ec2-13-52-163-253.us-west-1.compute.amazonaws.com/api/announcements";
     fetch(endpoint, { method: "DELETE", body: JSON.stringify({
         key: "w0lfpAck!@#",
         id: id

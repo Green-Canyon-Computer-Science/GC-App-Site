@@ -59,6 +59,10 @@ import {
   trashSharp,
   warningOutline,
   warningSharp,
+  constructOutline,
+  constructSharp,
+  speedometerOutline,
+  speedometerSharp
 } from 'ionicons/icons';
 
 const selectedIndex = ref(0);
@@ -80,6 +84,12 @@ const appPages = [
     url: '/notification',
     iosIcon: cloudDownloadOutline,
     mdIcon: cloudDownloadSharp,
+  },
+  {
+    title: 'Monitor Manager',
+    url: '/monitor',
+    iosIcon: speedometerOutline,
+    mdIcon: speedometerSharp,
   }
 ];
 </script>

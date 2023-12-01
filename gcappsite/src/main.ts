@@ -27,6 +27,7 @@ import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import enUS from '@kangc/v-md-editor/lib/lang/en-US';
+import PrimeVue from 'primevue/config';
 
 VueMarkdownEditor.lang.use('en-US', enUS);
 VueMarkdownEditor.use(vuepressTheme);
@@ -34,7 +35,8 @@ VueMarkdownEditor.use(vuepressTheme);
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(VueMarkdownEditor);
+  .use(VueMarkdownEditor)
+  .use(PrimeVue);
   
 router.isReady().then(() => {
   app.mount('#app');

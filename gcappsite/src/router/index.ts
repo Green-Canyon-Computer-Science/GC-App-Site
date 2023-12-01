@@ -17,6 +17,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/announcement',
     component: () => import ('../views/AnnouncementManager.vue')
+  },
+  {
+    path: '/monitor',
+    component: () => import ('../views/MonitorManager.vue')
   }
   
 ]

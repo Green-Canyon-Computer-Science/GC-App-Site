@@ -41,7 +41,7 @@ function conf(title, id) {
 
 function disablePoll(poll) {
     console.log(poll.disabled);
-    const endpoint = "http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/pollsdisable";
+    const endpoint = "http://ec2-13-52-163-253.us-west-1.compute.amazonaws.com/api/pollsdisable";
     fetch(endpoint, { method: "POST", body: JSON.stringify({
         key: "w0lfpAck!@#",
         id: poll.id,
@@ -54,7 +54,7 @@ function disablePoll(poll) {
 }
 
 function deletePoll(id) {
-    const endpoint = "http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/polls";
+    const endpoint = "http://ec2-13-52-163-253.us-west-1.compute.amazonaws.com/api/polls";
     fetch(endpoint, { method: "DELETE", body: JSON.stringify({
         key: "w0lfpAck!@#",
         id: id
