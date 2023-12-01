@@ -44,7 +44,7 @@
 
             console.log("Sending notification to " + recipient);
 
-            fetch("http://ec2-13-52-163-253.us-west-1.compute.amazonaws.com/api/notification", {
+            fetch("http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/notification", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
