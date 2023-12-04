@@ -33,31 +33,24 @@
                         </div>
                         <br>
                         <br>
-                        <br>
                         <h1>
                             Question {{ pollData.indexOf(pollQuestion) + 1}}
                         </h1>
 
-                        <br>
                         <ion-input placeholder="Question Title" :value="pollQuestion.title"></ion-input>
-                        <ion-checkbox class="required">Requires Response</ion-checkbox>
+                        <ion-checkbox v-if="pollQuestion.type != 'text'" class="required">Requires Response</ion-checkbox>
                         <br>
-                        <br>
-                        <ion-radio-group :value="pollQuestion.type" justify="space-between">
-                            <ion-item>
-                                <ion-radio value="text" justify="space-between">Text</ion-radio>
-                            </ion-item>
-                            <ion-item>
-                                <ion-radio value="radio" justify="space-between">Radio</ion-radio>
-                            </ion-item>
-                            <ion-item>
-                                <ion-radio value="checkbox" justify="space-between">Checkbox</ion-radio>
-                            </ion-item>
-                        </ion-radio-group>
-                        <br>
-                        <br>
-                        <div style="background-color: white; width: 80%; height: 3px;"></div>
-                        <br><br>
+                        <ion-item>
+                            <ion-label>Question Type</ion-label>
+                            <select v-model="pollQuestion.type" placeholder="Question Type">
+                                <option value="text">Text</option>
+                                <option value="radio">Radio</option>
+                                <option value="checkbox">Checkbox</option>
+                                <option value="short">Short Response</option>
+                                <option value="long">Long Response</option>
+                            </select>
+                        </ion-item>
+                        <div v-if="pollQuestion.type == 'radio' || pollQuestion.type == 'checkbox'" style="background-color: white; width: 80%; height: 3px;"></div>
                         <div v-for="option in pollQuestion.options" :key="option">
                             <span style="display: flex; flex-direction: row;">
                                 <ion-input placeholder="Option" :value="option.title"></ion-input> 
@@ -68,7 +61,7 @@
                             </span>
                         </div>
 
-                        <button style="width: 20%; font-size: 20px;" @click="addNewOption(pollQuestion)">
+                        <button v-if="pollQuestion.type == 'radio' || pollQuestion.type == 'checkbox'" style="width: 20%; font-size: 20px;" @click="addNewOption(pollQuestion)">
                             New Choice
                         </button>
                     
@@ -91,7 +84,7 @@
     import { ref } from "vue";
     import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem, IonCheckbox } from '@ionic/vue';
     const imageLink = ref('');
-
+    const questionTypes = ref({});
     const pollData = ref([]);
 
     function addNewQuestion() {
@@ -99,7 +92,7 @@
             title: "",
             options: [
             
-            ]
+            ],
         });
     
     }
@@ -131,8 +124,13 @@
         const poll = [];
         questions.forEach((el) => {
             const question = el.querySelectorAll("ion-input")[0].value;
-            const type = el.querySelectorAll("ion-radio-group")[0].value;
-            const required = el.querySelectorAll(".required")[0].checked;
+            const type = el.querySelectorAll("select")[0].value;
+            let required;
+            if (el.querySelectorAll(".required").length > 0) {
+                required = el.querySelectorAll(".required")[0].checked;
+            } else {
+                required = false;
+            }
             
             const options = [].slice.call((el.querySelectorAll("ion-input"))).splice(1);
             const optionsArray = [];
