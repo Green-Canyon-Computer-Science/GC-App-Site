@@ -1,15 +1,22 @@
 <template>
     <div class="full">
-        <h2>
+        <div>
+            <h2>
             {{ props.announcement.title }}
-        </h2>
-        <h6 style="color: gray">
-            {{ props.announcement.descr }}
-        </h6>
-        <div class="buttons full">
-            <ion-item>
-                <ion-button color="danger" @click="conf(props.announcement.title, props.announcement.id)">Delete</ion-button>
-            </ion-item>
+            </h2>
+            <h6 style="color: gray">
+                {{ props.announcement.descr }}
+            </h6>
+            <div class="buttons full">
+                <ion-item>
+                    <ion-button color="danger" @click="conf(props.announcement.title, props.announcement.id)">Delete</ion-button>
+                </ion-item>
+
+            </div>
+        </div>
+
+        <div>
+            <img :src="props.announcement.imglink" alt="" style="max-width: 150px; border-radius: 2px;">
         </div>
 
     </div>
@@ -65,5 +72,9 @@ function deleteannouncement(id) {
     }
     .full {
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
