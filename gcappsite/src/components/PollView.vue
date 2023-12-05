@@ -11,7 +11,7 @@
                 <ion-button @click="response">Responses</ion-button>
             </ion-item>
             <ion-item>
-                <ion-button @click="disablePoll(props.poll)"> {{ (props.poll.disabled=="false"?'Disable':'Enable') }} </ion-button>
+                <ion-button @click="disablePoll(props.poll)"> {{ (props.poll.disabled=="false"||props.poll.disabled==0?'Disable':'Enable') }} </ion-button>
             </ion-item>
             <ion-item>
                 <ion-button color="danger" @click="conf(props.poll.title, props.poll.id)">Delete</ion-button>
