@@ -11,14 +11,18 @@
               </ion-item>
             </ion-menu-toggle>
           </ion-list>
-        </ion-content>
+          <div style="bottom: 0; padding: 7px; display: flex; justify-content: center; align-items: center;">
+            <ion-input placeholder="Key" v-model="key" type="password"></ion-input>
+            <ion-button @click="saveKey()">Save Key</ion-button>  
+          </div>
+          </ion-content>
       </ion-menu>
       <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
   </ion-app>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import {
   IonApp,
   IonContent,
@@ -32,6 +36,8 @@ import {
   IonNote,
   IonRouterOutlet,
   IonSplitPane,
+  IonInput,
+  IonButton
 } from '@ionic/vue';
 import { ref } from 'vue';
 import {
@@ -66,6 +72,13 @@ import {
 } from 'ionicons/icons';
 
 const selectedIndex = ref(0);
+const key = ref('');
+key.value = localStorage.getItem("key");
+console.log(key.value);
+function saveKey() {
+  localStorage.setItem("key", key.value);
+  console.log(key.value)
+}
 const appPages = [
   {
     title: 'Announcment Manager',

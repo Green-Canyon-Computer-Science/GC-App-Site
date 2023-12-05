@@ -160,12 +160,18 @@
             "disabled": false,
             "polldata": JSON.stringify({poll: poll}),
             "image": imageLink.value,
-            "key": "w0lfpAck!@#"
+            "key": localStorage.getItem("key")
         }),     headers: {
             'Content-Type': 'application/json'
-        },}).then(() => {
-            location.reload();
+        },}).then((response) => {
+        if (!response.ok) {
+            alert("There was an error creating poll. Are you sure you have a key saved?");
+            return;
+        }
+        location.reload();
             alert("Poll created!");
+        }).catch(e => {
+            alert("An unknown error occurred.");
         });
 
 
@@ -193,7 +199,7 @@
                     "topic" : recipient,
                     "title" : "New poll!",
                     "body" : "New poll '" + title + "'",
-                    "key": "w0lfpAck!@#"
+                    "key": localStorage.getItem("key")
                 })
                 
             })

@@ -45,12 +45,18 @@
             "descr": desc,
             "imglink": imglink,
             "article": text.value,
-            "key": "w0lfpAck!@#"
+            "key": localStorage.getItem("key")
         }),     headers: {
             'Content-Type': 'application/json'
-        },}).then(() => {
-            location.reload();
-            alert("Announcement created!");
+        },}).then((response) => {
+        if (!response.ok) {
+            alert("There was an error creating poll. Are you sure you have a key saved?");
+            return;
+        }
+        location.reload();
+            alert("Poll created!");
+        }).catch(e => {
+            alert("An unknown error occurred.");
         });
 
 
@@ -78,7 +84,7 @@
                     "topic" : recipient,
                     "title" : "New announcement!",
                     "body" : title,
-                    "key": "w0lfpAck!@#"
+                    "key": localStorage.getItem("key")
                 })
                 
             })

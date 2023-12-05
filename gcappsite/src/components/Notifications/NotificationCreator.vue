@@ -53,7 +53,7 @@
                     "topic" : recipient,
                     "title" : title,
                     "body" : body,
-                    "key": "w0lfpAck!@#"
+                    "key": localStorage.getItem("key")
                 })
                 
             }).then(() => {

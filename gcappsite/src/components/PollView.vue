@@ -43,7 +43,7 @@ function disablePoll(poll) {
     console.log(poll.disabled);
     const endpoint = "https://greencanyonapp.com/api/pollsdisable";
     fetch(endpoint, { method: "POST", body: JSON.stringify({
-        key: "w0lfpAck!@#",
+        key: localStorage.getItem("key"),
         id: poll.id,
         disabled: !(poll.disabled=="true")
     }),     headers: {
@@ -56,7 +56,7 @@ function disablePoll(poll) {
 function deletePoll(id) {
     const endpoint = "https://greencanyonapp.com/api/polls";
     fetch(endpoint, { method: "DELETE", body: JSON.stringify({
-        key: "w0lfpAck!@#",
+        key: localStorage.getItem("key"),
         id: id
     }),     headers: {
         'Content-Type': 'application/json'

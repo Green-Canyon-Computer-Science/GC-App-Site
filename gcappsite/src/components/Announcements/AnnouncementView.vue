@@ -43,7 +43,7 @@ function conf(title, id) {
 function deleteannouncement(id) {
     const endpoint = "https://greencanyonapp.com/api/announcements";
     fetch(endpoint, { method: "DELETE", body: JSON.stringify({
-        key: "w0lfpAck!@#",
+        key: localStorage.getItem("key"),
         id: id
     }),     headers: {
         'Content-Type': 'application/json'
