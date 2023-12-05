@@ -41,7 +41,7 @@ function conf(title, id) {
 }
 
 function deleteannouncement(id) {
-    const endpoint = "http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/announcements";
+    const endpoint = "https://greencanyonapp.com/api/announcements";
     fetch(endpoint, { method: "DELETE", body: JSON.stringify({
         key: "w0lfpAck!@#",
         id: id

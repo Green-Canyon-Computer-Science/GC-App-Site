@@ -38,7 +38,7 @@
 
         console.log("Creating " + title + " with description " + desc);
 
-        const endpoint = "http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/announcements";
+        const endpoint = "https://greencanyonapp.com/api/announcements";
         fetch(endpoint, { method: "POST", body: JSON.stringify({
             "timestamp": (new Date().getTime()/1000),
             "title": title,
@@ -69,7 +69,7 @@
 
             console.log("Sending notification to " + recipient);
 
-            fetch("http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/notification", {
+            fetch("https://greencanyonapp.com/api/notification", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

@@ -5,7 +5,7 @@
     <div v-if="pollid != -1">
     </div>
     <ion-item class="centercontent" >
-        <ion-button  :href="'http://ec2-54-193-22-54.us-west-1.compute.amazonaws.com/api/pollsresponsescsv?pollid=' + pollid" :download="'poll_' + pollid + '.csv'" >Download CSV</ion-button>
+        <ion-button  :href="'https://greencanyonapp.com/api/pollsresponsescsv?pollid=' + pollid" :download="'poll_' + pollid + '.csv'" >Download CSV</ion-button>
     </ion-item>
 
 </template>
