@@ -49,7 +49,6 @@ function saveUsage() {
 
       data = pruneOldData(data);
       fs.writeFileSync('usage.json', JSON.stringify(data, null, 2));
-      console.log(data);
     });
     
 
