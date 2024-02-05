@@ -10,7 +10,7 @@
                         <ion-input placeholder="Image Link" label="" id="imglink" v-model="imageLink"></ion-input>
                         <img :src="imageLink" alt="" style="border: 1px solid white; max-height: 165px;">
                         <br>
-                        <ion-input placeholder="Button Text" label="" id="button"></ion-input>
+                        <ion-input placeholder="Button Text" label="" id="button" value="Take Poll"></ion-input>
                         <br>
                         <h1>Send with notification</h1>
                         <ion-checkbox label-placement="fixed" class="check" id="allnotif">All</ion-checkbox>

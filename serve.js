@@ -62,5 +62,5 @@ setInterval(saveUsage, 1000 * 60 * 10);
 saveUsage();
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`GC App Site listening on port ${port}`)
 })
