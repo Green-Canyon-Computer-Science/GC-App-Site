@@ -6,8 +6,12 @@
                 <ion-input placeholder="Announcement Description" label="" id="desc"></ion-input>
                 <ion-input placeholder="Image Link" label="" id="imglink" v-model="imageLink"></ion-input>
                 <img :src="imageLink" alt="" style="border: 1px solid white; max-height: 165px;">
+
+                <ion-checkbox label-placement="fixed" class="check" id="schedule" v-model="schedule">Schedule</ion-checkbox>
+                <input type="datetime-local" step="1" v-model="dateTime" v-if="schedule">
+                <p>{{ new Date(dateTime).getTime() }}</p>                
                 <br>
-                <h1>Send with notification</h1>
+                <h1>Notify</h1>
                 <ion-checkbox label-placement="fixed" class="check" id="allnotif">All</ion-checkbox>
                 <ion-checkbox label-placement="fixed" class="check" id="eventsnotif">Events</ion-checkbox>
                 <ion-checkbox label-placement="fixed" class="check" id="gamesnotif">Games</ion-checkbox>
@@ -25,10 +29,12 @@
 
 <script setup>
     import { ref } from 'vue';
-    import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem, IonCheckbox } from '@ionic/vue';
+    import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonDatetime, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem, IonCheckbox } from '@ionic/vue';
 
     const text = ref('');
     const imageLink = ref('');
+    const schedule = ref(false);
+    const dateTime = ref(0);
 
     function createSendAnnouncement() {
         // const pollContainer = this.$refs.poll;
@@ -38,26 +44,47 @@
 
         console.log("Creating " + title + " with description " + desc);
 
-        const endpoint = "https://greencanyonapp.com/api/announcements";
-        fetch(endpoint, { method: "POST", body: JSON.stringify({
-            "timestamp": (new Date().getTime()/1000),
-            "title": title,
-            "descr": desc,
-            "imglink": imglink,
-            "article": text.value,
-            "key": localStorage.getItem("key")
-        }),     headers: {
-            'Content-Type': 'application/json'
-        },}).then((response) => {
-        if (!response.ok) {
-            alert("There was an error creating poll. Are you sure you have a key saved?");
-            return;
+        if (!schedule.value) {
+            const endpoint = "https://greencanyonapp.com/api/announcements";
+            fetch(endpoint, { method: "POST", body: JSON.stringify({
+                "timestamp": (new Date().getTime()/1000),
+                "title": title,
+                "descr": desc,
+                "imglink": imglink,
+                "article": text.value,
+                "key": localStorage.getItem("key")
+            }),     headers: {
+                'Content-Type': 'application/json'
+            },}).then((response) => {
+            if (!response.ok) {
+                alert("There was an error creating poll. Are you sure you have a key saved?");
+                return;
+            }
+            location.reload();
+                alert("Poll created!");
+            }).catch(e => {
+                alert("An unknown error occurred.");
+            });
+        } else {
+            const endpoint = "https://greencanyonapp.com/api/announcements";
+            
+            fetch("/scheduleaction", {
+                method: "POST",
+                body: JSON.stringify({
+                    endpoint: "announcements",
+                    body: JSON.stringify({
+                        "timestamp": (new Date().getTime()/1000),
+                        "title": title,
+                        "descr": desc,
+                        "imglink": imglink,
+                        "article": text.value,
+                        "key": localStorage.getItem("key")
+                    }),
+                    time: new Date(dateTime.value).getTime()
+                })
+            });
         }
-        location.reload();
-            alert("Poll created!");
-        }).catch(e => {
-            alert("An unknown error occurred.");
-        });
+
 
 
         // If notification!
@@ -75,19 +102,34 @@
 
             console.log("Sending notification to " + recipient);
 
-            fetch("https://greencanyonapp.com/api/notification", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "topic" : recipient,
-                    "title" : "New announcement!",
-                    "body" : title,
-                    "key": localStorage.getItem("key")
+            if (!schedule.value) {
+                fetch("https://greencanyonapp.com/api/notification", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "topic" : recipient,
+                        "title" : "New announcement!",
+                        "body" : title,
+                        "key": localStorage.getItem("key")
+                    })
                 })
-                
-            })
+            } else {
+                fetch("/scheduleaction", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        endpoint: "notification",
+                        body: JSON.stringify({
+                            "topic" : recipient,
+                            "title" : "New announcement!",
+                            "body" : title,
+                            "key": localStorage.getItem("key")
+                        }),
+                        time: new Date(dateTime.value).getTime()
+                    })
+                });
+            }
 
         }
     }

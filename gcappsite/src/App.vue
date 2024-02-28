@@ -68,7 +68,9 @@ import {
   constructOutline,
   constructSharp,
   speedometerOutline,
-  speedometerSharp
+  speedometerSharp,
+  calendarOutline,
+  calendarSharp
 } from 'ionicons/icons';
 
 const selectedIndex = ref(0);
@@ -99,7 +101,13 @@ const appPages = [
     mdIcon: cloudDownloadSharp,
   },
   {
-    title: 'Monitor Manager',
+    title: 'Scheduler',
+    url: '/scheduler',
+    iosIcon: calendarOutline,
+    mdIcon: calendarSharp,
+  },
+  {
+    title: 'Server',
     url: '/monitor',
     iosIcon: speedometerOutline,
     mdIcon: speedometerSharp,

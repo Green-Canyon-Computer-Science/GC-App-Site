@@ -5,6 +5,9 @@
             <ion-card-content>
                 <ion-input placeholder="Notification Title" label="" id="title"></ion-input>
                 <ion-input placeholder="Notification Body" label="" id="desc"></ion-input>
+                <ion-checkbox label-placement="fixed" class="check" id="schedule" v-model="schedule">Schedule</ion-checkbox>
+                <input type="datetime-local" step="1" v-model="dateTime" v-if="schedule">
+                <p>{{ new Date(dateTime).getTime() }}</p>
                 <br>
                 <h1>Recipient</h1>
                 <ion-checkbox label-placement="fixed" class="check" id="allnotif">All</ion-checkbox>
@@ -24,6 +27,14 @@
 
 <script setup>
     import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonRadioGroup, IonRadio, IonItem, IonCheckbox } from '@ionic/vue';
+    import { ref } from "vue";
+    const schedule = ref(false);
+    const dateTime = ref(0);
+
+    const handleDateTimeChange = (event) => {
+        const timestamp = new Date(event.target.value).getTime();
+        console.log(timestamp); // Use the timestamp as needed
+    };
 
     function sendNotification() {
         const title = document.querySelectorAll("#title")[0].value;
@@ -44,23 +55,43 @@
 
             console.log("Sending notification to " + recipient);
 
-            fetch("https://greencanyonapp.com/api/notification", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "topic" : recipient,
-                    "title" : title,
-                    "body" : body,
-                    "key": localStorage.getItem("key")
-                })
-                
-            }).then(() => {
-                location.reload();
+            if (!schedule.value) {
+                fetch("https://greencanyonapp.com/api/notification", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "topic" : recipient,
+                        "title" : title,
+                        "body" : body,
+                        "key": localStorage.getItem("key")
+                    })
                     
-            });
-
+                }).then(() => {
+                    location.reload();
+                        
+                });
+            } else {
+ 
+                fetch("/scheduleaction", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        endpoint: "notification",
+                        body: JSON.stringify({
+                            "topic" : recipient,
+                            "title" : title,
+                            "body" : body,
+                            "key": localStorage.getItem("key")
+                        }),
+                        time: new Date(dateTime.value).getTime()
+                    })
+                    
+                }).then(() => {
+                    location.reload();
+                        
+                });
+            }
         }
     }
 </script>
